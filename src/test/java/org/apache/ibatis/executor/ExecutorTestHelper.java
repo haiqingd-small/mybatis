@@ -641,7 +641,7 @@ public class ExecutorTestHelper {
     final ResultMap rm = new ResultMap.Builder(config, "keyResultMap", Integer.class, new ArrayList<ResultMapping>())
         .build();
 
-    MappedStatement kms = new MappedStatement.Builder(config, "insertAuthor!selectKey", new StaticSqlSource(config,"SELECT 123456 as id FROM SYSIBM.SYSDUMMY1"), SqlCommandType.SELECT)
+    MappedStatement kms = new MappedStatement.Builder(config, "insertAuthor!selectKey", new StaticSqlSource(config,"SELECT 123456 as id FROM dual"), SqlCommandType.SELECT)
         .keyProperty("id")
         .resultMaps(new ArrayList<ResultMap>() {
           {

@@ -38,6 +38,7 @@ public final class LogFactory {
 
   static {
     //这边乍一看以为开了几个并行的线程去决定使用哪个具体框架的logging，其实不然
+    // 看起来是所有日志框架都去设置了，实际没有引入的包会抛出ClassNotFound异常，对异常是ignored的，会尝试直到有一个日志框架初始化成功为止。
     //slf4j
     tryImplementation(new Runnable() {
       @Override
@@ -73,7 +74,7 @@ public final class LogFactory {
         useJdkLogging();
       }
     });
-    //没有日志
+    // 如果上述所有的日志框架都初始化失败了，就使用无日志的模式
     tryImplementation(new Runnable() {
       @Override
       public void run() {
